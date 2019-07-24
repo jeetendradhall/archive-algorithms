@@ -13,7 +13,7 @@ Markdown is a
 
 ![Algo Design](https://github.com/jeetendradhall/algorithms/raw/master/heuristic.png "Algorithm Designs")
 
-v3
+v4
 
 Here's our logo (hover to see the title text):
 
