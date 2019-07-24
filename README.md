@@ -13,7 +13,7 @@ Markdown is a
 
 ![alt text]("https://github.com/jeetendradhall/algorithms/heuristic.png" "Algorithm Designs")
 
-v1
+v2
 
 ```markdown
 Syntax highlighted code block
