@@ -26,6 +26,16 @@ Syntax highlighted code block
 [Link](url) and ![Image](src)
 ```
 
+```markdown
+#read data
+df_data = pd.read_csv ('./datasets/boston-housing.csv')
+#train and test data separation
+msk = np.random.rand(len(df_data)) < 0.9
+df = df_data[msk]
+df_test = df_data[~msk]
+df.head (2)
+```
+
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ### Jekyll Themes
