@@ -11,7 +11,7 @@ Markdown is a
 	* and easy-to-use syntax for styling your writing.
 * It includes conventions for
 
-![List of Algorithm Designs]("DSA - AD.jpg")
+![List of Algorithm Designs]("https://github.com/jeetendradhall/algorithms/DSA - AD.jpg" "Algorithm Designs")
 
 ```markdown
 Syntax highlighted code block
