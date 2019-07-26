@@ -8,7 +8,7 @@ class Vertex:
 
     #properties
 
-    def get_key (self):
+    def get_id (self):
         return self.id
 
     def set_property (self, name, value):
@@ -16,6 +16,9 @@ class Vertex:
 
     def get_property (self, name):
         return self.props[name]
+
+    def has_property (self, name):
+        return name in self.props.keys()
 
     #neighbors
 
@@ -36,10 +39,22 @@ class Vertex:
     def get_neighbors (self):
         return self.neighbors.keys()
 
+    def print (self):
+        print ('id=', self.id)
+        print ('properties: ', end = "")
+        for n, v in self.props.items():
+            print (n, '=', v, ' ', end = "")
+        print("")
+        print ('neighbors: ', end = "")
+        for n, v in self.neighbors.items():
+            print (n, ' ', end = "")
+        print ("")
+
 #graph
 class Graph:
-    def __init__(self):
+    def __init__(self, directed = False):
         self.vertices = {}
+        self.directed = directed
 
     #vertices
 
@@ -59,6 +74,15 @@ class Graph:
 
     def add_edge (self, src, dest, weight = -1):
         self.vertices[src].add_neighbor (dest, weight)
+        #for undirected graph, add the reverse edge
+        if (self.directed == False):
+            self.vertices[dest].add_neighbor (src, weight)
+
+    def remove_edge (self, src, dest):
+        self.vertices[src].remove_neighbor (dest)
+        # for undirected graph, remove the reverse edge
+        if (self.directed == False):
+            self.vertices[dest].remove_neighbor(src)
 
     def has_edge (self, src, dest):
         return self.get_vertex(src).is_neighbor(dest)
@@ -71,8 +95,15 @@ class Graph:
     #print
 
     def print (self):
+        # for v in self:
+        #     print ('Vertex', v.get_key(), 'has neighbors ', end = "")
+        #     for n in v.get_neighbors():
+        #         print (n, ' ', end = "")
+        #     print ('')
         for v in self:
-            print ('Vertex', v.get_key(), 'has neighbors ', end = "")
-            for n in v.get_neighbors():
-                print (n, ' ', end = "")
-            print ('')
+            v.print()
+            if (v.has_property('color')):
+                print('print color:', v.get_property('color'))
+
+        for v_colored in [v for v in self if v.has_property('color')]:
+            print (v_colored.get_id())

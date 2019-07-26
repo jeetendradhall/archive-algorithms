@@ -1,7 +1,7 @@
 import unittest
 import Graph
 
-class MyTestCase(unittest.TestCase):
+class GraphTest(unittest.TestCase):
 
     #helper functions
 
@@ -33,10 +33,10 @@ class MyTestCase(unittest.TestCase):
         graph.add_edge('v1', 'v3')
         graph.add_edge('v2', 'v4')
         graph.add_edge('v3', 'v4')
-        graph.get_vertex('v1').set_property('color', 'red')
-        graph.get_vertex('v2').set_property('color', 'blue')
-        graph.get_vertex('v3').set_property('color', 'blue')
-        graph.get_vertex('v4').set_property('color', 'red')
+        #graph.get_vertex('v1').set_property('color', 'red')
+        #graph.get_vertex('v2').set_property('color', 'blue')
+        #graph.get_vertex('v3').set_property('color', 'blue')
+        #graph.get_vertex('v4').set_property('color', 'red')
 
         return graph
 
@@ -58,6 +58,8 @@ class MyTestCase(unittest.TestCase):
         return graph
 
     #define a stream, and create graph from stream
+    # this graph corresponds to the "Watering Hole JoJo Princeton University" road intersection
+    # described in section 1.1 of Ullman - Data Structures and Algorithms
     def create_graph_from_stream(self):
         edge_stream = [('AB', 'BC', 1), ('AB', 'BD', 1), ('AB', 'DA', 1), ('AB', 'EA', 1),
                   ('AC', 'BD', 1), ('AC', 'DA', 1), ('AC', 'DB', 1), ('AC', 'EA', 1), ('AC', 'EB', 1),
@@ -86,7 +88,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(v3.get_neighbors()), 0)
 
         #properties
-        self.assertEqual(v3.get_key(), 'v3')
+        self.assertEqual(v3.get_id(), 'v3')
         self.assertEqual(v4.get_property('color'), 'red')
 
     # test the Graph and Vertex class
@@ -99,18 +101,25 @@ class MyTestCase(unittest.TestCase):
 
         #neighbors
         self.assertEqual(v1.get_neighbors(), {'v3', 'v2'})
-        self.assertEqual(v3.get_neighbors(), {'v4'})
-        self.assertEqual(len(v4.get_neighbors()), 0)
+        self.assertEqual(v3.get_neighbors(), {'v4', 'v1'})
+        #self.assertEqual(len(v4.get_neighbors()), 0)
+        self.assertEqual(v4.get_neighbors(), {'v2', 'v3'})
         self.assertEqual(v3.is_neighbor('v4'), True)
 
-        v3.remove_neighbor('v4')
-        self.assertEqual(len(v3.get_neighbors()), 0)
+        #v3.remove_neighbor('v4')
+        self.assertEqual(graph.has_edge('v3', 'v4'), True)
+        self.assertEqual(graph.has_edge('v4', 'v3'), True)
+        graph.remove_edge('v3', 'v4')
+        self.assertEqual(v3.get_neighbors(), {'v1'})
         self.assertEqual(graph.has_edge('v3', 'v4'), False)
+        self.assertEqual(graph.has_edge('v4', 'v3'), False)
+        self.assertEqual(graph.has_edge('v2', 'v1'), True)
+        self.assertEqual(graph.has_edge('v3', 'v1'), True)
         self.assertEqual(graph.has_edge('v2', 'v4'), True)
 
         #properties
-        self.assertEqual(v3.get_key(), 'v3')
-        self.assertEqual(v4.get_property('color'), 'red')
+        self.assertEqual(v3.get_id(), 'v3')
+        #self.assertEqual(v4.get_property('color'), 'red')
 
         #print
         graph.print()
@@ -133,6 +142,17 @@ class MyTestCase(unittest.TestCase):
 
         #print
         graph.print()
+
+    def test_rough_work(self):
+        graph = self.create_graph()
+        v1 = graph.get_vertex('v1')
+        v2 = graph.get_vertex('v2')
+        v3 = graph.get_vertex('v3')
+        v4 = graph.get_vertex('v4')
+
+        v2.set_property('color', 'green')
+
+
 
 if __name__ == '__main__':
     unittest.main()
