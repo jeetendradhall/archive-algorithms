@@ -3,10 +3,30 @@ import Graph
 
 class GraphTest(unittest.TestCase):
 
+    #setup
+    def setUp(self):
+
+        # this graph corresponds to the "Watering Hole JoJo Princeton University" road intersection
+        # described in section 1.1 of Ullman - Data Structures and Algorithms
+        self.princeton_edge_stream = [('AB', 'BC', 1), ('AB', 'BD', 1), ('AB', 'DA', 1), ('AB', 'EA', 1),
+                  ('AC', 'BD', 1), ('AC', 'DA', 1), ('AC', 'DB', 1), ('AC', 'EA', 1), ('AC', 'EB', 1),
+                  ('AD', 'EA', 1), ('AD', 'EB', 1), ('AD', 'EC', 1),
+                  ('BC', 'AB', 1), ('BC', 'DB', 1), ('BC', 'EB', 1),
+                  ('BD', 'AB', 1), ('BD', 'AC', 1), ('BD', 'DA', 1), ('BD', 'EB', 1), ('BD', 'EC', 1),
+                  ('DA', 'AB', 1), ('DA', 'AC', 1), ('DA', 'BD', 1), ('DA', 'EB', 1), ('DA', 'EC', 1),
+                  ('DB', 'AC', 1), ('DB', 'BC', 1), ('DB', 'EC', 1),
+                  ('EA', 'AB', 1), ('EA', 'AC', 1), ('EA', 'AD', 1),
+                  ('EB', 'AC', 1), ('EB', 'AD', 1), ('EB', 'BC', 1), ('EB', 'BD', 1), ('EB', 'DA', 1),
+                  ('EC', 'AD', 1), ('EC', 'BD', 1), ('EC', 'DA', 1), ('EC', 'DB', 1)]
+        self.princeton_vertex_stream = ['BA', 'DC', 'ED']
+
+        #this graph corresponds to the planar graph in Fundamentals of Computer Algorithms - Horowitz, Sahni - section 7.4 fig 7.12
+        self.planar_edge_stream = [(1,2,1), (1,3,1), (1,4,1), (2,3,1), (2,4,1), (2,5,1), (3,4,1), (4,5,1)]
+
     #helper functions
 
-    #create vertices using the Vertex class
-    def create_vertices(self):
+    #create a graph using the Vertex class
+    def create_graph_using_Vertex(self):
         v1 = Graph.Vertex ('v1')
         v2 = Graph.Vertex ('v2')
         v3 = Graph.Vertex ('v3')
@@ -22,8 +42,8 @@ class GraphTest(unittest.TestCase):
 
         return v1, v2, v3, v4
 
-    # create vertices using the Graph class
-    def create_graph(self):
+    # create graph using the Graph class
+    def create_graph_using_Graph(self):
         graph = Graph.Graph()
         graph.add_vertex('v1')
         graph.add_vertex('v2')
@@ -33,15 +53,11 @@ class GraphTest(unittest.TestCase):
         graph.add_edge('v1', 'v3')
         graph.add_edge('v2', 'v4')
         graph.add_edge('v3', 'v4')
-        #graph.get_vertex('v1').set_property('color', 'red')
-        #graph.get_vertex('v2').set_property('color', 'blue')
-        #graph.get_vertex('v3').set_property('color', 'blue')
-        #graph.get_vertex('v4').set_property('color', 'red')
 
         return graph
 
-    #create graph from stream
-    def create_graph_from_stream_inner(self, edge_stream, vertex_stream):
+    #create graph from stream, using the Graph class
+    def create_graph_from_stream(self, edge_stream, vertex_stream = []):
         graph = Graph.Graph()
         for src, dest, weight in edge_stream:
             if src not in graph:
@@ -57,26 +73,26 @@ class GraphTest(unittest.TestCase):
 
         return graph
 
-    #define a stream, and create graph from stream
-    # this graph corresponds to the "Watering Hole JoJo Princeton University" road intersection
-    # described in section 1.1 of Ullman - Data Structures and Algorithms
-    def create_graph_from_stream(self):
-        edge_stream = [('AB', 'BC', 1), ('AB', 'BD', 1), ('AB', 'DA', 1), ('AB', 'EA', 1),
-                  ('AC', 'BD', 1), ('AC', 'DA', 1), ('AC', 'DB', 1), ('AC', 'EA', 1), ('AC', 'EB', 1),
-                  ('AD', 'EA', 1), ('AD', 'EB', 1), ('AD', 'EC', 1),
-                  ('BC', 'AB', 1), ('BC', 'DB', 1), ('BC', 'EB', 1),
-                  ('BD', 'AB', 1), ('BD', 'AC', 1), ('BD', 'DA', 1), ('BD', 'EB', 1), ('BD', 'EC', 1),
-                  ('DA', 'AB', 1), ('DA', 'AC', 1), ('DA', 'BD', 1), ('DA', 'EB', 1), ('DA', 'EC', 1),
-                  ('DB', 'AC', 1), ('DB', 'BC', 1), ('DB', 'EC', 1),
-                  ('EA', 'AB', 1), ('EA', 'AC', 1), ('EA', 'AD', 1),
-                  ('EB', 'AC', 1), ('EB', 'AD', 1), ('EB', 'BC', 1), ('EB', 'BD', 1), ('EB', 'DA', 1),
-                  ('EC', 'AD', 1), ('EC', 'BD', 1), ('EC', 'DA', 1), ('EC', 'DB', 1)]
-        vertex_stream = ['BA', 'DC', 'ED']
-        return self.create_graph_from_stream_inner(edge_stream, vertex_stream)
+    # #define a stream, and create graph from stream
+    # # this graph corresponds to the "Watering Hole JoJo Princeton University" road intersection
+    # # described in section 1.1 of Ullman - Data Structures and Algorithms
+    # def create_graph_from_stream(self):
+    #     edge_stream = [('AB', 'BC', 1), ('AB', 'BD', 1), ('AB', 'DA', 1), ('AB', 'EA', 1),
+    #               ('AC', 'BD', 1), ('AC', 'DA', 1), ('AC', 'DB', 1), ('AC', 'EA', 1), ('AC', 'EB', 1),
+    #               ('AD', 'EA', 1), ('AD', 'EB', 1), ('AD', 'EC', 1),
+    #               ('BC', 'AB', 1), ('BC', 'DB', 1), ('BC', 'EB', 1),
+    #               ('BD', 'AB', 1), ('BD', 'AC', 1), ('BD', 'DA', 1), ('BD', 'EB', 1), ('BD', 'EC', 1),
+    #               ('DA', 'AB', 1), ('DA', 'AC', 1), ('DA', 'BD', 1), ('DA', 'EB', 1), ('DA', 'EC', 1),
+    #               ('DB', 'AC', 1), ('DB', 'BC', 1), ('DB', 'EC', 1),
+    #               ('EA', 'AB', 1), ('EA', 'AC', 1), ('EA', 'AD', 1),
+    #               ('EB', 'AC', 1), ('EB', 'AD', 1), ('EB', 'BC', 1), ('EB', 'BD', 1), ('EB', 'DA', 1),
+    #               ('EC', 'AD', 1), ('EC', 'BD', 1), ('EC', 'DA', 1), ('EC', 'DB', 1)]
+    #     vertex_stream = ['BA', 'DC', 'ED']
+    #     return self.create_graph_from_stream_inner(edge_stream, vertex_stream)
 
     #test the Vertex class
-    def test_vertex(self):
-        v1, v2, v3, v4 = self.create_vertices()
+    def test_Vertex(self):
+        v1, v2, v3, v4 = self.create_graph_using_Vertex()
 
         #neighbors
         self.assertEqual(v1.get_neighbors(), {'v3', 'v2'})
@@ -92,8 +108,8 @@ class GraphTest(unittest.TestCase):
         self.assertEqual(v4.get_property('color'), 'red')
 
     # test the Graph and Vertex class
-    def test_graph(self):
-        graph = self.create_graph()
+    def test_Graph(self):
+        graph = self.create_graph_using_Graph()
         v1 = graph.get_vertex('v1')
         v2 = graph.get_vertex('v2')
         v3 = graph.get_vertex('v3')
@@ -122,11 +138,13 @@ class GraphTest(unittest.TestCase):
         #self.assertEqual(v4.get_property('color'), 'red')
 
         #print
+        print('Inside test_Graph:')
         graph.print()
 
     #test code to create graph from stream
-    def test_graph_2(self):
-        graph = self.create_graph_from_stream()
+    def test_graph_creation_from_stream(self):
+        #create princeton graph
+        graph = self.create_graph_from_stream(self.princeton_edge_stream, self.princeton_vertex_stream)
 
         #graph = self.create_graph()
         AB = graph.get_vertex('AB')
@@ -141,18 +159,8 @@ class GraphTest(unittest.TestCase):
         self.assertEqual(AC.get_neighbors(), {'DB', 'BD', 'DA', 'EA', 'EB'})
 
         #print
+        print('Inside test_graph_creation_from_stream:')
         graph.print()
-
-    def test_rough_work(self):
-        graph = self.create_graph()
-        v1 = graph.get_vertex('v1')
-        v2 = graph.get_vertex('v2')
-        v3 = graph.get_vertex('v3')
-        v4 = graph.get_vertex('v4')
-
-        v2.set_property('color', 'green')
-
-
 
 if __name__ == '__main__':
     unittest.main()

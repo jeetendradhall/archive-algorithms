@@ -17,7 +17,7 @@ class Color(enum.Enum):
     russet = 11
     slate = 12
 
-class GraphColoring:
+class GreedyGraphColoring:
     def __init__(self, graph):
         self.graph = graph
 
