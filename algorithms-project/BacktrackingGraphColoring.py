@@ -6,5 +6,6 @@ class BacktrackingGraphColoring:
     def mColoring(self, id):
         print ('inside mColoring')
 
+
     def nextValue(self, id):
         print ('inside nextValue')
