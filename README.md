@@ -5,13 +5,13 @@
 
 #### Modeling a Problem as a Discrete Mathematical Structure
 
-Given a **problem** to be solved, we can **model** certain aspects of the problem by translating it to one or more **discrete mathematical structures**. E.g. a traffic signal problem can be modeled using a graph structure. A mathematical model can be represented in a programming language by declaring **abstract data types** (ADT).
+Given a **problem** to be solved, we can **model** certain aspects of the problem by translating it to one or more **discrete mathematical structures** (DMS). E.g. a traffic signal problem can be modeled using a graph structure. A mathematical model can be represented in a programming language by declaring an **abstract data type** (ADT).
 
 ![alt text](https://github.com/jeetendradhall/algorithms/raw/master/FromProblems2Instructions.png "From Problems to Machine Instructions")
 
 #### Representing a Discrete Mathematical Structure as an Abstract Data Type
 
-**An ADT is an interface declaration **. It is a declaration of the interface of the mathematical model it represents. E.g. a discrete mathematical concept of a SET can be represented in a programming language like C++ as a class with a name (say) CDictionary and public methods insert, delete, and isMember. Here, the discrete mathematical concept of set is being used as a dictionary ADT. From a problem standpoint, we may have started with thinking of dictionary as part of the model. But, it helps to keep in mind that dictionary is not a discrete mathematical structure (set is).
+**An ADT is an interface declaration** of the mathematical model it represents. E.g. a 'set' DMS can be represented in a programming language like Python as a class with the name _Dictionary_ and public methods _insert_, _delete_, and _isMember_. The discrete mathematical concept of a set provides numerous operations to be performed on a set (union, intersection, difference, insert, delete, is_member, etc). From a problem standpoint, we may have started with thinking of dictionary as part of the model, hence the dictionary ADT with relevant member functions only. But, it helps to keep in mind that unlike a set, dictionary is not a discrete mathematical structure. It is the beginning of the realization of the discrete 
 
 Another representation of a set is the ADT priority queue with methods insert and deleteMin. Usually, many ADTs (list, stack, queue, map, dictionary, priority queue, etc) are available in the language library. For the traffic signal problem, the discrete mathematical structure of Graph will be represented by a class (say) CGraph. It will have methods that return the first node getFirst, the next node getNext, mark a node as colored setColor, etc. The client code for this ADT expects its interface to remain unchanged. The underlying implementation may change without impacting the client. The data fields of an ADT are implemeted using data structures and the interface methods are implemented using algorithms.
 
