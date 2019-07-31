@@ -12,6 +12,15 @@ class BacktrackingGraphColoringTest(unittest.TestCase):
         graphTest.setUp()
         graph = graphTest.create_graph_from_stream(graphTest.planar_edge_stream)
 
+        #iterate graph
+        it = iter (graph)
+        while True:
+            #print (v.get_id())
+            v = next (it)
+            if v is None:
+                break
+            print(v.get_id())
+
         # color the graph using BacktrackingGraphColoring
         gc = BacktrackingGraphColoring(graph)
         gc.mColoring(1)

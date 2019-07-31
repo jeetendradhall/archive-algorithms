@@ -26,7 +26,7 @@ class GreedyGraphColoring:
 
         #GREEDY - SELECT
         #for an uncolored vertex in graph (get a list of vertices with no color property)
-        for v_uncolored in [v for v in self.graph if not v.has_property('color')]:
+        for v_uncolored in [v for v in self.graph.vertices.values() if not v.has_property('color')]:
             #GREEDY - FEASIBLE
             is_neighbor_of_batch_vertex = False
             #check if it is the neighbor of any vertex in batch
@@ -66,6 +66,13 @@ class GreedyGraphColoring:
     def print(self):
         print ("")
         #iterate over the vertices
-        for v in self.graph:
+        for v in self.graph.vertices.values():
             # print the id, and the color property
             print (v.get_id(), 'has', v.get_property('color'))
+
+        it = iter (self.graph)
+        while True:
+            v = next(it)
+            if (v is None):
+                break
+            print (v.get_id(), 'HAS', v.get_property('color'))

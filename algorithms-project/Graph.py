@@ -55,6 +55,7 @@ class Graph:
     def __init__(self, directed = False):
         self.vertices = {}
         self.directed = directed
+        self.current_vertex = None
 
     #vertices
 
@@ -90,7 +91,18 @@ class Graph:
     #iterate over vertices
 
     def __iter__ (self):
-        return iter(self.vertices.values())
+        # return iter(self.vertices.values())
+
+        self.idx_current_vertex = 0
+        return self
+
+    def __next__ (self):
+        vertices = self.vertices.values()
+        if self.idx_current_vertex >= len (vertices):
+            return None
+
+        self.idx_current_vertex = self.idx_current_vertex + 1
+        return list (vertices) [self.idx_current_vertex - 1]
 
     #print
 
@@ -100,10 +112,10 @@ class Graph:
         #     for n in v.get_neighbors():
         #         print (n, ' ', end = "")
         #     print ('')
-        for v in self:
+        for v in self.vertices.values():
             v.print()
             if (v.has_property('color')):
                 print('print color:', v.get_property('color'))
 
-        for v_colored in [v for v in self if v.has_property('color')]:
+        for v_colored in [v for v in self.vertices.values() if v.has_property('color')]:
             print (v_colored.get_id())
