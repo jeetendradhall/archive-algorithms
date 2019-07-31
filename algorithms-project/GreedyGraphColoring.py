@@ -1,21 +1,6 @@
 #implements the graph coloring algorithm
+from Color import Color
 
-#colors
-import enum
-
-class Color(enum.Enum):
-    turquoise = 1
-    indigo = 2
-    magenta = 3
-    cyan = 4
-    teal = 5
-    azure = 6
-    rose = 7
-    amber = 8
-    vermillon = 9
-    plum = 10
-    russet = 11
-    slate = 12
 
 class GreedyGraphColoring:
     def __init__(self, graph):
@@ -51,7 +36,7 @@ class GreedyGraphColoring:
     #GREEDY APPROACH
     def color_graph(self):
 
-        #iterate over colors (hoping we won't exhaust them
+        #iterate over colors (hoping we won't exhaust them)
         for c in Color:
             # get vertex batch for this color
             vertex_batch = self.color_vertex_batch(c)

@@ -1,45 +1,39 @@
 import unittest
 
 from BacktrackingGraphColoring import BacktrackingGraphColoring
+from Color import Color
 from GraphTest import GraphTest
 
 
 class BacktrackingGraphColoringTest(unittest.TestCase):
 
-    def test_backtracking_graph_coloring(self):
-        #create a graph using GraphTest
-        graphTest = GraphTest()
-        graphTest.setUp()
-        graph = graphTest.create_graph_from_stream(graphTest.planar_edge_stream)
-
-        #iterate graph
-        it = iter (graph)
-        while True:
-            #print (v.get_id())
-            v = next (it)
-            if v is None:
-                break
-            print(v.get_id())
+    def color_graph(selfself, graph):
+        # #iterate graph
+        # it = iter (Color.cyan)
+        # while True:
+        #     #print (v.get_id())
+        #     c = next (it)
+        #     if c is None:
+        #         break
+        #     print(c)
 
         # color the graph using BacktrackingGraphColoring
         gc = BacktrackingGraphColoring(graph)
-        gc.mColoring(1)
+        gc.mColoring(iter(graph))
+        gc.print()
 
-    # #test the graph coloring class
-    # def test_graph_coloring(self):
-    #
-    #     #create a graph using GraphTest
-    #     #this graph corresponds to the "Watering Hole JoJo Princeton University" road intersection
-    #     # described in section 1.1 of Ullman - Data Structures and Algorithms
-    #     graphTest = GraphTest()
-    #     graph = graphTest.create_graph_from_stream()
-    #
-    #     #color the graph using GraphColoring
-    #     gc = GreedyGraphColoring(graph)
-    #     gc.color_graph()
-    #     gc.print()
+    def test_backtracking_graph_coloring(self):
+        # initialize the graph creation class
+        graphTest = GraphTest()
+        graphTest.setUp()
 
+        # color the planar graph
+        graph = graphTest.create_graph_from_stream(graphTest.planar_edge_stream)
+        self.color_graph(graph)
 
+        # color the  graph
+        #graph = graphTest.create_graph_from_stream(graphTest.princeton_edge_stream, graphTest.princeton_vertex_stream)
+        #self.color_graph(graph)
 
 if __name__ == '__main__':
     unittest.main()
