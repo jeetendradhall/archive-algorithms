@@ -83,3 +83,17 @@ class Node:
         tiles[idx_space] = tiles[idx_numeric]
         tiles[idx_numeric] = temp
         return tiles
+
+    def is_answer_node(self, tiles):
+        #if space is not at end
+        if tiles.index(0) != 15:
+            return False
+
+        #if tiles are not sorted 1..15
+        tiles_sorted = tiles[:15].copy()
+        tiles_sorted.sort()
+        if (tiles_sorted != tiles[:15]):
+            return False
+
+        #tiles are sorted, with a trailing space. solved!
+        return True
