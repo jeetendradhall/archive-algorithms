@@ -21,6 +21,7 @@ class Color(enum.Enum):
 
     def __next__(self):
         if (self.idx_current > 4):#depends on the graph. 4 for planar, 5 for princeton
+
             return None
 
         self.idx_current = self.idx_current + 1
