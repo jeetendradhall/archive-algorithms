@@ -52,5 +52,34 @@ class Node:
         if idx_space > 11:
             actions.remove(Move.bottom.value)
 
-        #generate child nodes for valid actions
-        return actions
+        #3 generate child nodes for valid actions
+
+        #each child is a list of tiles
+        l_tiles = [] #list of list of tiles
+        #for each action, create a child tile position list
+        for action in actions:
+            #child of this node will make a move starting from the tile positioning of this node
+            tiles = self.tiles.copy()
+
+            #make a move for this action and create a child tile position list
+            if action == Move.up.value:
+                tiles = self.swap(tiles, idx_space, idx_space - 4)
+            elif action == Move.right.value:
+                tiles = self.swap(tiles, idx_space, idx_space + 1)
+            elif action == Move.down.value:
+                tiles = self.swap(tiles, idx_space, idx_space + 4)
+            elif action == Move.left.value:
+                tiles = self.swap(tiles, idx_space, idx_space - 1)
+
+            #add child tile position list to the list of children
+            l_tiles.append(tiles)
+
+        return l_tiles
+
+    #implementing a move
+    #swap the space tile with a numeric tile
+    def swap(self, tiles, idx_space, idx_numeric):
+        temp = tiles[idx_space]
+        tiles[idx_space] = tiles[idx_numeric]
+        tiles[idx_numeric] = temp
+        return tiles
