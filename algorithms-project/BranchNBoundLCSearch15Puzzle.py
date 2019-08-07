@@ -16,6 +16,12 @@ class Node:
         self.tiles = tiles
         self.calculate_cost()
 
+    def get_tiles(self):
+        return self.tiles
+
+    def get_parent(self):
+        return self.parent
+
     def get_children(self):
         #1 prepare a list of actions to begin with
         actions = [e.value for e in Move]
