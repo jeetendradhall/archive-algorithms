@@ -19,6 +19,7 @@ class BranchNBoundLCSearch:
 
         #loop
 
+
             #get children of e_node
                 #is child an answer node? if yes, then quit: 'path of root to answer node'
                 #add child to the live_nodes queue
