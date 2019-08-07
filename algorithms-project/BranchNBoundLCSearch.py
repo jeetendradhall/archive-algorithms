@@ -4,9 +4,8 @@ from BranchNBoundLCSearch15Puzzle import Node
 class BranchNBoundLCSearch:
 
     def __init__(self, root_node):
-        self.heap = []
+        self.live_nodes = [] #a priority queue
         self.root_node = root_node
-        self.live_nodes = [] #should be a priority queue
 
     #return a list of 'list of tiles' from root to answer node
     @classmethod
@@ -56,11 +55,11 @@ class BranchNBoundLCSearch:
                 if child.is_answer_node():
                     return BranchNBoundLCSearch.get_answer(child)
                 #add child to the live_nodes queue
-                heappush(self.heap, child)
+                heappush(self.live_nodes, child)
 
             #are there more live_nodes? if no, then quit: 'no answer node'
-            if (len(self.heap) == 0):
+            if (len(self.live_nodes) == 0):
                 return None
 
             #get next live_node, now this node is the e_node
-            e_node = heappop(self.heap)
+            e_node = heappop(self.live_nodes)
