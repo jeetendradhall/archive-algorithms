@@ -12,13 +12,15 @@ class BranchNBoundLCSearch15PuzzleTest(unittest.TestCase):
         self.assertEqual(children[0].is_answer_node(), False)
         self.assertEqual(children[1].is_answer_node(), True)
 
-        #cost
-        self.assertEqual(puzzle.get_cost(), -1)
-        self.assertEqual(children[1].get_cost(), -1)
-
         #path length
         self.assertEqual(puzzle.get_path_length(), 0)
         self.assertEqual(children[1].get_path_length(), 1)
+
+        #calculate cost
+        puzzle.calculate_cost()
+        print(puzzle.get_cost())
+        print(children[0].get_cost())
+        print(children[1].get_cost())
 
 if __name__ == '__main__':
     unittest.main()

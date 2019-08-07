@@ -11,10 +11,10 @@ class Move(enum.Enum):
 #a tile with value '0' indicates a space tile
 class Node:
     def __init__(self, tiles, parent = None, parent_move = Move.none):
-        self.tiles = tiles
-        self.calculate_cost()
         self.parent = parent
         self.parent_move = parent_move
+        self.tiles = tiles
+        self.calculate_cost()
 
     def get_children(self):
         #1 prepare a list of actions to begin with
@@ -78,15 +78,6 @@ class Node:
 
         return children
 
-    #get length of path from root to this node
-    def get_path_length(self):
-        len = 0
-        node = self
-        while node.parent != None:
-            len = len + 1
-            node = node.parent
-        return len
-
     #is the puzzle solved?
     def is_answer_node(self):
         #if space is not at end, not solved.
@@ -102,9 +93,29 @@ class Node:
         #tiles are sorted, with a trailing space. solved!
         return True
 
+    #get length of path from root to this node
+    def get_path_length(self):
+        len = 0
+        node = self
+        while node.parent != None:
+            len = len + 1
+            node = node.parent
+        return len
+
     #calculate cost of this node
+    #cost = length of path from root + number of tiles not in their position
     def calculate_cost(self):
-        self.cost = -1
+        cost = self.get_path_length()
+        for pos in range(15):
+            #if tile number not equal to (zero based) tile position
+            #if tile is not at its correct position
+            if self.tiles[pos] != pos+1:
+                cost += 1
+
+        if self.tiles[15] != 0:
+            cost += 1
+
+        self.cost = cost
 
     #get cost of this node
     def get_cost(self):
