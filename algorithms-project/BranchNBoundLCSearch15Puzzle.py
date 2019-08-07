@@ -55,7 +55,7 @@ class Node:
         #3 generate child nodes for valid actions
 
         #each child is a list of tiles
-        l_tiles = [] #list of list of tiles
+        children = [] #list of Node's
         #for each action, create a child tile position list
         for action in actions:
             #child of this node will make a move starting from the tile positioning of this node
@@ -63,37 +63,40 @@ class Node:
 
             #make a move for this action and create a child tile position list
             if action == Move.up.value:
-                tiles = self.swap(tiles, idx_space, idx_space - 4)
+                tiles = Node.swap(tiles, idx_space, idx_space - 4)
             elif action == Move.right.value:
-                tiles = self.swap(tiles, idx_space, idx_space + 1)
+                tiles = Node.swap(tiles, idx_space, idx_space + 1)
             elif action == Move.down.value:
-                tiles = self.swap(tiles, idx_space, idx_space + 4)
+                tiles = Node.swap(tiles, idx_space, idx_space + 4)
             elif action == Move.left.value:
-                tiles = self.swap(tiles, idx_space, idx_space - 1)
+                tiles = Node.swap(tiles, idx_space, idx_space - 1)
 
             #add child tile position list to the list of children
-            l_tiles.append(tiles)
+            children.append(Node(tiles, action))
 
-        return l_tiles
+        return children
 
-    #implementing a move
-    #swap the space tile with a numeric tile
-    def swap(self, tiles, idx_space, idx_numeric):
-        temp = tiles[idx_space]
-        tiles[idx_space] = tiles[idx_numeric]
-        tiles[idx_numeric] = temp
-        return tiles
-
-    def is_answer_node(self, tiles):
-        #if space is not at end
-        if tiles.index(0) != 15:
+    #is the puzzle solved?
+    def is_answer_node(self):
+        #if space is not at end, not solved.
+        if self.tiles.index(0) != 15:
             return False
 
-        #if tiles are not sorted 1..15
-        tiles_sorted = tiles[:15].copy()
+        #if tiles are not sorted 1..15, not solved.
+        tiles_sorted = self.tiles[:15].copy()
         tiles_sorted.sort()
-        if (tiles_sorted != tiles[:15]):
+        if (tiles_sorted != self.tiles[:15]):
             return False
 
         #tiles are sorted, with a trailing space. solved!
         return True
+
+    #class method
+    #implementing a move
+    #swap the space tile with a numeric tile
+    @classmethod
+    def swap(cls, tiles, idx_space, idx_numeric):
+        temp = tiles[idx_space]
+        tiles[idx_space] = tiles[idx_numeric]
+        tiles[idx_numeric] = temp
+        return tiles
