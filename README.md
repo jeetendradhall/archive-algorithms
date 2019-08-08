@@ -52,6 +52,8 @@ Any composition of flow-of-control constructs is an algorithm. The Vertex ADT ge
 
 ### Graph Coloring - Greedy Approach
 
+Code can be found at [github](https://github.com/jeetendradhall/algorithms/tree/master/algorithms-project) github.
+
 ```
 class GreedyGraphColoring:
     def __init__(self, graph):
