@@ -5,13 +5,17 @@
 
 #### Modeling a Problem as a Discrete Mathematical Structure
 
-Given a **problem** to be solved, we can **model** certain aspects of the problem by translating it to one or more **discrete mathematical structures** (DMS). E.g. a traffic signal problem can be modeled using a graph structure. A mathematical model can be represented in a programming language by declaring an **abstract data type** (ADT).
+Given a **problem** to be solved, we can **model** _certain aspects_ of the problem by translating it to one or more **discrete mathematical structures** (DMS). E.g. a traffic signal problem can be modeled _using_ a graph structure. A mathematical model can be _represented_ in a programming language by declaring an **abstract data type** (ADT).
 
 ![alt text](https://github.com/jeetendradhall/algorithms/raw/master/FromProblems2Instructions.png "From Problems to Machine Instructions")
 
 #### Representing a Discrete Mathematical Structure as an Abstract Data Type
 
-**An ADT is an interface declaration** of the mathematical model it represents. E.g. a 'set' DMS can be represented in a programming language like Python as a class with the name _Dictionary_ and public methods _insert_, _delete_, and _isMember_. The discrete mathematical concept of a set provides numerous operations to be performed on a set (union, intersection, difference, insert, delete, is_member, etc). From a problem standpoint, we may have started with thinking of dictionary as part of the model, hence the dictionary ADT with relevant member functions only. But, it helps to keep in mind that unlike a set, dictionary is not a discrete mathematical structure. It is the beginning of the realization of the discrete 
+**An ADT is an interface declaration** of the mathematical model it represents. E.g. a 'graph' mathematical structure can be represented in a programming language like Python as a class named Graph with public methods _add_vertex_, _add_edge_, _remove_edge_, etc along with another ADT class named Vertex with public methods _get_neighbors_, _is_neighbor_, _set_property_, etc.
+
+![alt text](https://github.com/jeetendradhall/algorithms/raw/master/Graph_Vertex_ADT.png "Graph and Vertex ADTs")
+
+The discrete mathematical concept of a graph provides numerous operations / methods to be performed on a graph (enumerate edges of a vertex, depth-first search, breadth-first search, etc). From a problem standpoint, we start with thinking of graph as part of the model, and represent it as the Graph and Vertex ADT with relevant public methods only.
 
 Another representation of a set is the ADT priority queue with methods insert and deleteMin. Usually, many ADTs (list, stack, queue, map, dictionary, priority queue, etc) are available in the language library. For the traffic signal problem, the discrete mathematical structure of Graph will be represented by a class (say) CGraph. It will have methods that return the first node getFirst, the next node getNext, mark a node as colored setColor, etc. The client code for this ADT expects its interface to remain unchanged. The underlying implementation may change without impacting the client. The data fields of an ADT are implemeted using data structures and the interface methods are implemented using algorithms.
 
