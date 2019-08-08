@@ -36,7 +36,7 @@ The instruction set also provides flow-of-control constructs like LOOP, JMP, CAL
 
 #### Data Structures and Algorithms of the Abstract Data Types
 
-The data fields and methods of ADTs are implemented using the data structuring facilities and flow-of-control constructs provided by the programming language. For the Graph ADT, we can choose a 2-dimensional array data structure or an adjacency list data structure. The adjacency list is a composition of an array with each element being a linked list. It may as well be a map of vertex_id to Vertex ADT, with Vertex ADT having a map of neighbors mapping neighbor vertex name to the weight of the edge. So, we may have nested ADTs that are eventually implemented using data structures like arrays, linked lists, trees, hash tables, etc.
+The data fields and methods of ADTs are implemented using the data structuring facilities and flow-of-control constructs provided by the programming language. For the Graph ADT, we can choose a 2-dimensional array data structure or an adjacency list data structure (mapping / associative store). The adjacency list is a composition of an array with each element being a linked list. It may as well be a map of vertex_id to Vertex ADT, with Vertex ADT having a map of neighbors mapping neighbor vertex name to the weight of the edge. So, we may have nested ADTs that are eventually implemented using data structures like arrays, linked lists, trees, hash tables, etc.
 
 ![alt text](https://github.com/jeetendradhall/algorithms/raw/master/DMS-ADT-DS.png "Discrete Mathematical Structures, Abstract Data Types, and Data Structures")
 
@@ -49,6 +49,52 @@ From a problem standpoint, we can look at the Graph ADT as a data structure and 
 Any composition of flow-of-control constructs is an algorithm. The Vertex ADT get_neighbors method implementation is an algorithm, so is the graph coloring method. But, there is a distinction. The ADT methods algorithms serve the _implementation_ needs of structure and navigation of an ADT, whereas the graph coloring algorithm works on the _representation_ (Graph interface) of the discrete mathematical model (graph model) to solve the problem.
 
 **All standard algorithms have some underlying algorithm design principles (Greedy, Dynamic Programming, etc)**. The number of such principles are comparitively few. Knowing those design principles help us in understanding standard algorithms, and also enhances our ability to devise our own algorithms.
+
+### Graph Coloring - Greedy Approach
+
+```
+class GreedyGraphColoring:
+    def __init__(self, graph):
+        self.graph = graph
+
+    def color_vertex_batch(self, color):
+        vertex_batch = []
+
+        #GREEDY - SELECT
+        #for an uncolored vertex in graph (get a list of vertices with no color property)
+        for v_uncolored in [v for v in self.graph.vertices.values() if not v.has_property('color')]:
+            #GREEDY - FEASIBLE
+            is_neighbor_of_batch_vertex = False
+            #check if it is the neighbor of any vertex in batch
+            # iterate over vertices in the batch
+            for v_batch in vertex_batch:
+                #is this uncolored vertex a neighbor of some vertex in batch?
+                if v_uncolored.get_id() in v_batch.get_neighbors():
+                    #if yes, flag neighbor_found_in_batch, and break the batch vertex loop
+                    is_neighbor_of_batch_vertex = True
+                    break
+            # GREEDY - UNION
+            #if not is_neighbor_of_batch_vertex, add the color property to the vertex and add it to the batch
+            if (is_neighbor_of_batch_vertex != True):
+                #add the color property to the vertex
+                v_uncolored.set_property('color', color)
+                #add it to the batch
+                vertex_batch.append(v_uncolored)
+
+        #return vertex batch, an empty batch implying we have colored all vertices
+        return vertex_batch
+
+    #GREEDY APPROACH
+    def color_graph(self):
+
+        #iterate over colors (hoping we won't exhaust them)
+        for c in Color:
+            # get vertex batch for this color
+            vertex_batch = self.color_vertex_batch(c)
+            # if batch is empty, we have finished coloring. break from the loop.
+            if not vertex_batch:
+                break
+```
 
 ## References
 1. [ULLDSA](https://www.amazon.com/Data-Structures-Algorithms-Alfred-Aho/dp/0201000237/ref=sr11?crid=PED8DJ3UJARO&keywords=data+structures+and+algorithms.+aho%2C+ullman+%26+hopcroft&qid=1563976870&s=gateway&sprefix=ullman+data+structures+%2Caps%2C375&sr=8-1) - Data Structures and Algorithms - Aho, Hopcroft, Ullman
