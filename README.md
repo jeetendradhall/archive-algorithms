@@ -3,11 +3,15 @@
 ### The problem solving process
 (refer ULLDSA section 1.1, 1.2)
 
+![alt text](https://github.com/jeetendradhall/algorithms/raw/master/FromProblems2Instructions.png "From Problems to Machine Instructions")
+
 #### Modeling a Problem as a Discrete Mathematical Structure
 
 Given a **problem** to be solved, we can **model** _certain aspects_ of the problem by translating it to one or more **discrete mathematical structures** (DMS). E.g. a traffic signal problem can be modeled _using_ a graph structure. A mathematical model can be _represented_ in a programming language by declaring an **abstract data type** (ADT).
 
-![alt text](https://github.com/jeetendradhall/algorithms/raw/master/FromProblems2Instructions.png "From Problems to Machine Instructions")
+![alt text](https://github.com/jeetendradhall/algorithms/raw/master/Intersection.png "Road intersection near JoJo's bar near Princeton University, NJ, USA")
+
+![alt text](https://github.com/jeetendradhall/algorithms/raw/master/Graph_Model.png "graph model of the problem")
 
 #### Representing a Discrete Mathematical Structure as an Abstract Data Type
 
