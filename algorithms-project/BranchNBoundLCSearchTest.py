@@ -1,9 +1,7 @@
 import unittest
 
 from BranchNBoundLCSearch15Puzzle import Node, Move
-
 from BranchNBoundLCSearch import BranchNBoundLCSearch
-
 
 class BranchNBoundLCSearchTest(unittest.TestCase):
     def test_something(self):

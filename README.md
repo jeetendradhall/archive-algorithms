@@ -98,5 +98,13 @@ class GreedyGraphColoring:
                 break
 ```
 
+### Set-theoretic Abstract Data Types
+
+#### Operations on Set
+
+#### Dictionary
+
+#### Priority Queue
+
 ## References
 1. [ULLDSA](https://www.amazon.com/Data-Structures-Algorithms-Alfred-Aho/dp/0201000237/ref=sr11?crid=PED8DJ3UJARO&keywords=data+structures+and+algorithms.+aho%2C+ullman+%26+hopcroft&qid=1563976870&s=gateway&sprefix=ullman+data+structures+%2Caps%2C375&sr=8-1) - Data Structures and Algorithms - Aho, Hopcroft, Ullman
