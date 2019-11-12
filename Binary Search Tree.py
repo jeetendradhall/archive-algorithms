@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[15]:
+# In[20]:
 
 
 import queue
@@ -207,6 +207,35 @@ class Node:
             #delete successor node
             del (succ)
             
+    def compare (self, other):
+        
+        #set_trace()
+        #compare the node
+        if self.value != other.value:
+            return False
+        
+        same = True
+        
+        #compare the left child
+        if (self.left == None and other.left == None):
+            same = True
+        elif (self.left != None and other.left != None):
+            same = self.left.compare (other.left)
+        else:
+            same = False
+            
+        #we proceed to the right side only if left side is same
+        if same == True:
+            #compare the right child
+            if (self.right == None and other.right == None):
+                same = True
+            elif (self.right != None and other.right != None):
+                same = self.right.compare (other.right)
+            else:
+                same = False
+            
+        return same
+
     #print the subtree of this node
     def print (self):
         #set_trace ()
@@ -274,20 +303,35 @@ class Node:
                 break
 
 
-# In[16]:
+# In[26]:
 
 
 from IPython.core.debugger import set_trace
 root = Node (8)
 root.insert (3)
 root.insert (10)
-root.insert (1)
+#root.insert (1)
 root.insert (6)
 root.insert (4)
 root.insert (7)
 root.insert (14)
 root.insert (13)
 root.print()
+
+
+# In[27]:
+
+
+root2 = Node (8)
+root2.insert (3)
+root2.insert (10)
+#root2.insert (1)
+root2.insert (6)
+root2.insert (4)
+root2.insert (7)
+root2.insert (14)
+root2.insert (13)
+root2.print()
 
 
 # In[ ]:
@@ -315,11 +359,17 @@ print('Parent of minimum is', node.get_min(parent_of_subtree)[1].value)
 root.lookup(1)[0].num_children()
 
 
-# In[17]:
+# In[ ]:
 
 
 root.delete (8)
 root.print ()
+
+
+# In[28]:
+
+
+root.compare(root2)
 
 
 # In[ ]:
