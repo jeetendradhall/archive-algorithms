@@ -1,51 +1,53 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[65]:
 
 
 import numpy as np
 
 
-# In[2]:
+# In[78]:
 
 
-X = "AGGTAB"
+X = "AGGTABX"
 Y = "GXTXAYB"
 n_x = len(X)
 n_y = len(Y)
-lcs_matrix = np.zeros ((n_x+1,n_y+1))
+lcs_matrix = np.ones ((n_x+1,n_y+1)) * -1
+lcs = []
 
 
-# In[5]:
+# In[79]:
 
 
-for i in range (n_x, 0, -1):
-    for j in range (n_y, 0, -1):
-        if X[i-1] == Y[i-1]:
-            lcs_matrix[i][j] = 
+for i in range (0, n_x+1):
+    for j in range (0, n_y+1):
+        if i == 0 or j == 0:
+            lcs_matrix[i][j] = 0
+        elif X[i-1] == Y[j-1]:
+            lcs_matrix[i][j] = lcs_matrix[i-1][j-1] + 1
+            print (i,j)
+            lcs.append (X[i-1])
+        else:
+            max_candidate = max([(0, lcs_matrix[i-1][j]),
+                                 (1, lcs_matrix[i][j-1])],
+                                key = lambda x: x[1])
+            #if max_candidate[0] == 0:
+            #    lcs.append(X[])
+            lcs_matrix[i][j] = max_candidate[1]
 
 
-# In[13]:
+# In[80]:
 
 
-def lcs(X, Y, m, n):
-    if m == 0 or n == 0: 
-        return 0; 
-    elif X[m-1] == Y[n-1]: 
-        print (m, n, X[m-1], Y[n-1])
-        return 1 + lcs(X, Y, m-1, n-1); 
-    else: 
-        return max(lcs(X, Y, m, n-1), lcs(X, Y, m-1, n)); 
+lcs_matrix
 
 
-# In[14]:
+# In[81]:
 
 
-# Driver program to test the above function 
-X = "AGGTAB"
-Y = "GXTXAYB"
-print ("Length of LCS is ", lcs(X , Y, len(X), len(Y)) )
+lcs
 
 
 # In[ ]:
